@@ -110,12 +110,12 @@ public class DecimalNumber {
             return "1";
         } else if(carry ==1) {
             if (toInt(s.charAt(0))+1 < 10) {
-                ans = ans + (toInt(s.charAt(0)) + 1) + decimalIncrement(s.substring(1), 0);
+                ans =  (toInt(s.charAt(0)) + 1) + decimalIncrement(s.substring(1), 0);
             } else {
-                ans = ans + 0 + decimalIncrement(s.substring(1), 1);
+                ans =  0 + decimalIncrement(s.substring(1), 1);
             }
         } else{
-            ans = ans +s.charAt(0)+ decimalIncrement(s.substring(1), 0);
+            ans = s.charAt(0)+ decimalIncrement(s.substring(1), 0);
         }
             // ---------------write your code ABOVE this line only! ------------------
         return ans;
@@ -146,15 +146,15 @@ public class DecimalNumber {
             return "1";
         }else if(carry ==1) {
             if (toInt(s.charAt(0)) * 2 < 10) {
-                ans = ans + (toInt(s.charAt(0)) * 2) +1 + decimalDouble(s.substring(1), 0);
+                ans =  (toInt(s.charAt(0)) * 2) +1 + decimalDouble(s.substring(1), 0);
             } else {
-                ans = ans + ((toInt(s.charAt(0))*2 % 10) + 1) + decimalDouble(s.substring(1), 1);
+                ans =  ((toInt(s.charAt(0))*2 % 10) + 1) + decimalDouble(s.substring(1), 1);
             }
         } else{
             if(toInt(s.charAt(0)) * 2 < 10)
-                ans = ans + (toInt(s.charAt(0)) * 2) + decimalDouble(s.substring(1), 0);
+                ans =  (toInt(s.charAt(0)) * 2) + decimalDouble(s.substring(1), 0);
             else
-                ans = ans + ((toInt(s.charAt(0))*2 % 10)) + decimalDouble(s.substring(1), 1);
+                ans =  ((toInt(s.charAt(0))*2 % 10)) + decimalDouble(s.substring(1), 1);
 
         }
             // ---------------write your code ABOVE this line only! ------------------
@@ -168,7 +168,7 @@ public class DecimalNumber {
         String ans ="";
         // ---------------write your code BELOW this line only! ------------------
         if(s.length() == 0){
-            return "";
+            return "0";
         } else{
             ans = decimalDouble(binaryToDecimal(s.substring(1)));
             if (s.charAt(0) == '1') {
@@ -178,14 +178,25 @@ public class DecimalNumber {
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
     }
-
+    public static void main(String[] args){
+        System.out.println(octalToDecimal("1234567"));
+    }
     //Task 1.5
     // 's' is a string representing a valid octal number.
     // Converts an octal string 's' to its decimal string representation.
     private static String octalToDecimal(String s) {
         String ans = "";
         // ---------------write your code BELOW this line only! ------------------
-
+        if(s.length() == 0){
+            return "0";
+        }
+        ans = octalToDecimal(s.substring(1));
+        for (int i = 0; i < 3; i++) {
+            ans = decimalDouble(ans);
+        }
+        for (int i = 0; i < toInt(s.charAt(0)); i++) {
+            ans = decimalIncrement(ans);
+        }
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
     }
