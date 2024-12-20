@@ -72,8 +72,8 @@ public class BigIntegerOperations {
     public static void main(String[] args){
         BigInteger[] primes =
                 {BigInteger.valueOf(2),BigInteger.valueOf(3),BigInteger.valueOf(5)};
-        BigInteger n = BigInteger.valueOf(10);
-        System.out.println(canFactorizeToTarget(primes, n)); // true
+        BigInteger n = BigInteger.valueOf(2);
+        printFactorization(primes, n);
     }
 
     //Task 2.5
@@ -135,8 +135,28 @@ public class BigIntegerOperations {
     //If n can be expressed as a product of prime numbers from primes, it prints the numbers in the factorization
     public static void printFactorization(BigInteger[] primes, BigInteger n) {
         // ---------------write your code BELOW this line only! ------------------
-
+        if(!canFactorizeToTarget(primes,n)){
+            throw new IllegalArgumentException("data is not valid");
+        }
+        printFactorization(primes,n,0);
         // ---------------write your code ABOVE this line only! ------------------
+    }
+    public static void printFactorization(BigInteger[] primes, BigInteger n,int i) {
+        if(n.equals(BigInteger.valueOf(1))){
+            System.out.println("");
+        } else if (n.equals(primes[i])) {
+            System.out.print(primes[i]);
+            printFactorization(primes,n.divide(primes[i]),i);
+        } else{
+            if(n.mod(primes[i]) == BigInteger.valueOf(0)){
+                System.out.print(primes[i] +",");
+                printFactorization(primes,n.divide(primes[i]),i);
+            } else{
+                i =i + 1;
+                printFactorization(primes,n,i);
+            }
+        }
+
     }
 
 }
