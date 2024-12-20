@@ -11,7 +11,9 @@ public class DecimalNumber {
     // Constructs a DecimalNumber with the given decimal string value
     public DecimalNumber(String value) {
         // ---------------write your code BELOW this line only! ------------------
-
+          if(!legalNumericString(value,10))
+              throw new IllegalArgumentException("value is not valid");
+          this.decimalValue = value;
         // ---------------write your code ABOVE this line only! ------------------
     }
 
@@ -20,7 +22,15 @@ public class DecimalNumber {
     // Constructs a DecimalNumber by converting the given value from the specified base to decimal.
     public DecimalNumber(String value, int base) {
         // ---------------write your code BELOW this line only! ------------------
-
+        this(value);
+        if(base != 2 && base != 8 && base != 10)
+            throw new IllegalArgumentException("illegal base");
+        if(base == 2){
+            value = binaryToDecimal(value);
+        } else if (base == 8){
+            value = octalToDecimal(value);
+        }
+            this.decimalValue = value;
         // ---------------write your code ABOVE this line only! ------------------
     }
 
@@ -41,7 +51,7 @@ public class DecimalNumber {
     public String toString() {
         String ans = "";
         // ---------------write your code BELOW this line only! ------------------
-
+        ans = decimalValue;
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
     }
@@ -52,7 +62,9 @@ public class DecimalNumber {
     public boolean equals(Object other) {
         boolean equals = false;
         // ---------------write your code BELOW this line only! ------------------
-
+        if( other instanceof DecimalNumber){
+            equals = this.decimalValue.equals((((DecimalNumber) other).decimalValue));
+        }
         // ---------------write your code ABOVE this line only! ------------------
         return equals;
     }
@@ -177,9 +189,6 @@ public class DecimalNumber {
         }
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
-    }
-    public static void main(String[] args){
-        System.out.println(octalToDecimal("1234567"));
     }
     //Task 1.5
     // 's' is a string representing a valid octal number.
