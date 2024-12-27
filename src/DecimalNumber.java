@@ -87,8 +87,8 @@ public class DecimalNumber {
             ans = false;
         else{
             for(int i =0;i<s.length() && ans;i++){
-                if(toInt(s.charAt(i))>=base)
-                    ans =false;
+                if(toInt(s.charAt(i))>=base || toInt(s.charAt(i)) == -1)
+                    ans = false;
             }
             if(s.length() != 1 && toInt(s.charAt(s.length()-1))==0)
                 ans = false;
@@ -96,6 +96,12 @@ public class DecimalNumber {
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
     }
+    public static boolean legalNumericStringTomer(String s, int base) {return legalNumericString(s, base);}
+    public static String decimalIncrementTomer(String s) {return decimalIncrement(s);}
+    public static String decimalDoubleTomer(String s){return decimalDouble(s);}
+    public static String binaryToDecimalTomer(String s){return binaryToDecimal(s); }
+    public static String octalToDecimalTomer(String s) { return octalToDecimal(s); }
+    public String getValue(){return this.decimalValue;}
 
     //Task 1.2
     // 's' is a string representing a valid decimal number.
@@ -180,7 +186,7 @@ public class DecimalNumber {
         String ans ="";
         // ---------------write your code BELOW this line only! ------------------
         if(s.length() == 0){
-            return "0";
+            ans = "0";
         } else{
             ans = decimalDouble(binaryToDecimal(s.substring(1)));
             if (s.charAt(0) == '1') {
@@ -197,14 +203,15 @@ public class DecimalNumber {
         String ans = "";
         // ---------------write your code BELOW this line only! ------------------
         if(s.length() == 0){
-            return "0";
-        }
-        ans = octalToDecimal(s.substring(1));
-        for (int i = 0; i < 3; i++) {
-            ans = decimalDouble(ans);
-        }
-        for (int i = 0; i < toInt(s.charAt(0)); i++) {
-            ans = decimalIncrement(ans);
+            ans = "0";
+        } else {
+            ans = octalToDecimal(s.substring(1));
+            for (int i = 0; i < 3; i++) {
+                ans = decimalDouble(ans);
+            }
+            for (int i = 0; i < toInt(s.charAt(0)); i++) {
+                ans = decimalIncrement(ans);
+            }
         }
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
