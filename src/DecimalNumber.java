@@ -96,12 +96,6 @@ public class DecimalNumber {
         // ---------------write your code ABOVE this line only! ------------------
         return ans;
     }
-    public static boolean legalNumericStringTomer(String s, int base) {return legalNumericString(s, base);}
-    public static String decimalIncrementTomer(String s) {return decimalIncrement(s);}
-    public static String decimalDoubleTomer(String s){return decimalDouble(s);}
-    public static String binaryToDecimalTomer(String s){return binaryToDecimal(s); }
-    public static String octalToDecimalTomer(String s) { return octalToDecimal(s); }
-    public String getValue(){return this.decimalValue;}
 
     //Task 1.2
     // 's' is a string representing a valid decimal number.
