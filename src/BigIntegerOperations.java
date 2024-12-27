@@ -11,7 +11,7 @@ public class BigIntegerOperations {
         if(n == null)
             throw new IllegalArgumentException("Illegal value");
         sum = new BigInteger("0");
-        for(BigInteger i = new BigInteger("0") ;sum.compareTo(n) <0; i = i.add(BigInteger.valueOf(1))){
+        for(BigInteger i = new BigInteger("0") ;i.compareTo(n) <0; i = i.add(BigInteger.valueOf(1))){
             sum = sum.add(i);
         }
 
@@ -69,12 +69,6 @@ public class BigIntegerOperations {
         // ---------------write your code ABOVE this line only! ------------------
         return myRand;
     }
-    public static void main(String[] args){
-        BigInteger[] primes =
-                {BigInteger.valueOf(2),BigInteger.valueOf(3),BigInteger.valueOf(5)};
-        BigInteger n = BigInteger.valueOf(2);
-        printFactorization(primes, n);
-    }
 
     //Task 2.5
     // No assumptions
@@ -84,16 +78,18 @@ public class BigIntegerOperations {
         // ---------------write your code BELOW this line only! ------------------
         if(primes == null)
             isValid = false;
-        for(int i =0;i<primes.length-1 && isValid;i++){
-            if(primes[i].compareTo(primes[i+1])>-1 || !isPrime(primes[i]) || !isPrime(primes[i+1])){
-                isValid = false;
-            }
-            for(int j =0;j<i;j++){
-                if(primes[i].equals(primes[j])){
+        if(isValid && primes.length != 0) {
+            for (int i = 0; isValid && i < primes.length - 1; i++) {
+                if (primes[i].compareTo(primes[i + 1]) > -1 || !isPrime(primes[i]) || !isPrime(primes[i + 1])) {
                     isValid = false;
                 }
-            }
+                for (int j = 0; j < i && isValid; j++) {
+                    if (primes[i].equals(primes[j])) {
+                        isValid = false;
+                    }
+                }
 
+            }
         }
         // ---------------write your code ABOVE this line only! ------------------
         return isValid;
@@ -142,7 +138,7 @@ public class BigIntegerOperations {
         // ---------------write your code ABOVE this line only! ------------------
     }
     public static void printFactorization(BigInteger[] primes, BigInteger n,int i) {
-        if(n.equals(BigInteger.valueOf(1))){
+        if(n.equals(BigInteger.valueOf(1)) || primes.length ==0){
             System.out.println("");
         } else if (n.equals(primes[i])) {
             System.out.print(primes[i]);
