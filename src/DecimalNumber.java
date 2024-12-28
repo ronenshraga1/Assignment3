@@ -23,7 +23,7 @@ public class DecimalNumber {
     public DecimalNumber(String value, int base) {
         // ---------------write your code BELOW this line only! ------------------
         this(value);
-        if(base != 2 && base != 8 && base != 10)
+        if((base != 2 && base != 8 && base != 10) || !(legalNumericString(value,base)))
             throw new IllegalArgumentException("illegal base");
         if(base == 2){
             value = binaryToDecimal(value);
