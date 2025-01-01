@@ -24,6 +24,9 @@ public class BigIntegerOperations {
     //prints n pseudo-random numbers
     public static void printRandoms(int n){
         // ---------------write your code BELOW this line only! ------------------
+        if(n < 0){
+            throw new IllegalArgumentException("not valid number");
+        }
         Random random = new Random();
         for(int i =0;i<n;i++){
             System.out.println(random.nextInt());
